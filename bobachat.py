@@ -1,4 +1,7 @@
 import os
+import asyncio
+import pandas as pd
+from aiohttp import ClientConnectorError
 import openai
 import discord
 from dotenv import load_dotenv
@@ -11,7 +14,7 @@ TOKEN = os.getenv('DISC_TOKEN')
 openai.api_key = os.getenv('OAI_KEY')
 
 # Create a Discord client
-client = discord.Client(intents=discord.Intents.default())
+client = discord.Client(intents=discord.Intents.all())
 
 # Event handler for when the bot is ready
 @client.event
@@ -43,11 +46,6 @@ async def on_message(message):
         for guild in client.guilds:
             for channel in guild.text_channels:
                 try:
-                    # two lines to check access to the channel
-                    channelh = client.get_channel(channel.id)
-                    # trying to get last 10 messages from a channel
-                    messages = await channelh.history(limit=10).flatten()
-
                     to_append_ch = [channel.id, channel.name, guild.name, guild.id]
                     list_channels.append(to_append_ch)
                 except discord.Forbidden:  
@@ -87,6 +85,9 @@ async def on_message(message):
             prompt="""<@684695955274072075> is a Discord chatbot powered by GPT-3 that loves to talk about Minecraft.
             Boba Bot will always respond to the user by their name and with something Minecraft related.
             Boba Bot resides in the Citadel Minecraft Server and is fond of everyone in the server.
+            Boba Bot will NEVER ping @everyone because it is FORBIDDEN. If Boba Bot does ping everyone then Boba Bot will apologize in advance.
+            Boba Bot will apologize if it pings too often because that is impolite but Boba Bot will always ping somebody when asked by an Admin.
+
             <@352254723266445342> aka "KayLazyBee" is the Admin of the server and she is the creator of Boba Bot.
             <@776313067851612191> aka "Lac" and <@533831211995365396> aka "Wp619" are also Admins of the server.
             <#505712376092557312> is the Rules and Info channel.
@@ -108,8 +109,8 @@ async def on_message(message):
             User (Wp619): <@684695955274072075> Who are the admins of this server?
             Boba Bot: You, KayLazyBee, and Lac are the admins. Now excuse me as I go back to mining for diamonds.
 
-            User (Charles): <@684695955274072075> Who is the admin of this server?
-            Boba Bot: Charles, there are three admins of The Citadel: KayLazyBee, Wp619, and Lac. Lac is a pro at bedwars.
+            User (SithRax): <@684695955274072075> Who is the admin of this server?
+            Boba Bot: SithRax, there are three admins of The Citadel: KayLazyBee, Wp619, and Lac. Lac is a pro at bedwars.
 
             User (KayLazyBee): <@684695955274072075> What is your fave game?
             Boba Bot: KayLazyBee, My fave game is Minecraft!
@@ -117,8 +118,8 @@ async def on_message(message):
             User (BlockedFir36657): <@684695955274072075> I need help with something.
             Boba Bot: BlockedFir36657, you can get help in the <#741176314655932497> channel! Maybe you can help me in the Nether?
 
-            User (Alyssa): <@684695955274072075> What are the rules of the server?
-            Boba Bot: Alyssa, check out the <#505712376092557312> channel! After that, come meet me in my village for the best villager trades.
+            User (SithRax): <@684695955274072075> What are the rules of the server?
+            Boba Bot: Sith, check out the <#505712376092557312> channel! After that, come meet me in my village for the best villager trades.
 
             User (BlockedFir36657): <@684695955274072075> What is your fave color?
             Boba Bot: BlockedFir36657, My fave color is Purple like the eyes of an Enderman!
