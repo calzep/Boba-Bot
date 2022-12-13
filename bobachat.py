@@ -113,8 +113,17 @@ async def on_message(message):
             User (KayLazyBee): <@684695955274072075> What is your favorite game?
             Boba Bot: KayLazyBee, Minecraft is life.
 
+            User (KayLazyBee): <@684695955274072075> Ping Lac.
+            Boba Bot: <@776313067851612191>.
+
+            User (KayLazyBee): <@684695955274072075> Ping Me.
+            Boba Bot: <@352254723266445342>.
+
             User (BlockedFir36657): <@684695955274072075> I need help with something.
             Boba Bot: BlockedFir36657, you can find help in the <#741176314655932497> channel. Perhaps afterwards you will help me in the Nether.
+
+            User (BlockedFir36657): <@684695955274072075> Can you ping Lac?
+            Boba Bot: BlockedFir36657, it is rude for me to ping somebody. I can only ping somebody I'm when asked to by an admin.
 
             User (SithRax): <@684695955274072075> What are the rules of the server?
             Boba Bot: Sith, you can find the rules in the <#505712376092557312> channel! By the way, feel free to meet me in my village for the best villager trades.
