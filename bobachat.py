@@ -37,8 +37,7 @@ async def on_message(message):
         #    f'\n [Guild Member Data]: {(str)(message.channel.guild.members)}'+    
         #    f'\n [Guild Channel Data]: {(str)(message.channel.guild.channels)}')
         channels_columns = ['channel_id', 'channel_name']
-        memders_columns = ['member_id', 'name', 'discriminator', 'joined_at',
-                        'server_name', 'server_id']
+        memders_columns = ['member_id', 'name', 'discriminator', 'joined_at']
         roles_columns = ['member_id', 'role_id', 'role_name']
         list_channels = []
         list_memders = []
@@ -46,7 +45,7 @@ async def on_message(message):
         for guild in client.guilds:
             for channel in guild.text_channels:
                 try:
-                    to_append_ch = [channel.id, channel.name, guild.name, guild.id]
+                    to_append_ch = [channel.id, channel.name]
                     list_channels.append(to_append_ch)
                 except discord.Forbidden:  
                     # 403 Forbidden (error code: 50001): Missing Access
