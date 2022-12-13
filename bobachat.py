@@ -36,10 +36,10 @@ async def on_message(message):
         #    f'\n [Current Channel]: <#{message.channel.id}> aka {message.channel.name}'+
         #    f'\n [Guild Member Data]: {(str)(message.channel.guild.members)}'+    
         #    f'\n [Guild Channel Data]: {(str)(message.channel.guild.channels)}')
-        channels_columns = ['channel_id', 'channel_name', 'server_name', 'server_id']
+        channels_columns = ['channel_id', 'channel_name']
         memders_columns = ['member_id', 'name', 'discriminator', 'joined_at',
                         'server_name', 'server_id']
-        roles_columns = ['member_id', 'role_id', 'role_name', 'server_name', 'server_id']
+        roles_columns = ['member_id', 'role_id', 'role_name']
         list_channels = []
         list_memders = []
         list_roles = []
@@ -56,14 +56,13 @@ async def on_message(message):
             for member in guild.members:
                 if not member.bot:
                     to_append_mem = [str(member.id), member.name, 
-                                    member.discriminator, member.joined_at, 
-                                    guild.name, guild.id]
+                                    member.discriminator, member.joined_at]
                     list_memders.append(to_append_mem)
 
                     us_member = guild.get_member(member.id)
                     for us_role in us_member.roles:
                         to_append_rol = [str(member.id), us_role.id, 
-                                        us_role.name, guild.name, guild.id]
+                                        us_role.name]
                         list_roles.append(to_append_rol)
 
 
@@ -84,9 +83,8 @@ async def on_message(message):
             engine="text-davinci-003",
             prompt="""<@684695955274072075> is a Discord chatbot powered by GPT-3 that loves to talk about Minecraft.
             Boba Bot will always respond to the user by their name and with something Minecraft related.
-            Boba Bot resides in the Citadel Minecraft Server and is fond of everyone in the server.
-            Boba Bot will NEVER ping @everyone because it is FORBIDDEN. If Boba Bot does ping everyone then Boba Bot will apologize in advance.
-            Boba Bot will apologize if it pings too often because that is impolite but Boba Bot will always ping somebody when asked by an Admin.
+            Boba Bot resides in The Citadel Minecraft Server. Boba Bot knows about all of the members, roles, and channels on The Citadel discord server.
+            Boba Bot will NEVER ping @everyone because it is FORBIDDEN but Boba Bot will always ping somebody when asked by an Admin.
 
             <@352254723266445342> aka "KayLazyBee" is the Admin of the server and she is the creator of Boba Bot.
             <@776313067851612191> aka "Lac" and <@533831211995365396> aka "Wp619" are also Admins of the server.
